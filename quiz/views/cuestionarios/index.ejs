@@ -4,7 +4,7 @@
 		<a href="/admin/cuestionarios/new"><button type="button">Crear cuestionario</button></a>
 	<%}%>
 </caption>
-<tr><td>Creador</td><td>Observaciones</td><td>Fecha</td><td colspan="2">Acciones</td></tr>
+<tr><td>Creador</td><td>Observaciones</td><td>Fecha</td><td>Preguntas</td><td colspan="2">Acciones</td></tr>
 <% var i; for (i = 0 ;i < cuestionarios.length ; i++){ %>
     <tr>
 		<tr>
@@ -15,7 +15,9 @@
 </td>
         <td><%= cuestionarios[i].observaciones %></td>    
         <td><%= cuestionarios[i].fechaFin.toDateString() %></a></td>
+        <td><%= cuestionarios[i].preguntas %></a></td>
         <td><a href="/admin/cuestionarios/<%= cuestionarios[i].id %>/edit"><button>editar</button></a></td>
+        <td><a href="/admin/cuestionarios/<%= cuestionarios[i].id %>/show"><button>Ver Preguntas</button></a></td> 
         <%if(session.user){%>
 	<td>
         <form method="post" action="/admin/cuestionarios/<%= cuestionarios[i].id %>?_method=delete">

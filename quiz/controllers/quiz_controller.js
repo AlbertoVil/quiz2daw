@@ -26,7 +26,9 @@ exports.show = function(req, res) {
     res.render('quizes/show', {quiz: req.quiz});
 };
 
-
+exports.buscarPreguntas = function(req,res) {
+    
+};
 
 
 // GET /quizes/:id/answer

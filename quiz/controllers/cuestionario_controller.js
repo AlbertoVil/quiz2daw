@@ -10,7 +10,7 @@ exports.load = function(req, res, next, cuestionarioId) {
 			if(cuestionario) {
 				req.cuestionario = cuestionario;
 				next();
-			} else { next(new Error('No existe commentId=' + cuestionarioId))}	
+			} else { next(new Error('No existe cuestionarioId=' + cuestionarioId))}	
 		}
 	).catch(function(error){next(error)});
 }
@@ -31,9 +31,21 @@ exports.edit = function(req, res) {
     res.render('cuestionarios/edit', {cuestionario: cuestionario});
 };
 
+exports.buscarPreguntas = function(req,res) {
+    var preguntasCuestionario = req.cuestionario.preguntas.split(",");
+    models.Quiz.finAll().then(function(quizes) {
+        where: {
+            preguntasCuestionario : Array(Number)(preguntasCuestionario);
+        }        
+    }).then(function(quizes) {
+        res.render('cuestionarios/show', {quizes: quizes, preguntasCestionario: preguntasCuestionario, errors: []});
+    })
+};
+
 exports.update = function(req, res) {
     req.cuestionario.observaciones = req.body.cuestionario.observaciones;
     req.cuestionario.fechaFin = req.body.cuestionario.fechaFin;
+    req.cuestionario.preguntas = req.body.cuestionario.preguntas;
     
     req.cuestionario
             .validate()
@@ -43,7 +55,7 @@ exports.update = function(req, res) {
                     res.render('cuestionarios/edit',{cuestionario: req.cuestionario});
                 }else{
                     req.cuestionario
-                            .save({fields:["observaciones","fechaFin"]})
+                            .save({fields:["observaciones","fechaFin","preguntas"]})
                             .then(function(){res.redirect('/admin/cuestionarios');});
                 }
             }
@@ -59,9 +71,13 @@ exports.destroy = function(req, res){
 // GET /cuestionarios/new
 exports.new = function(req, res) {
 	var cuestionario = models.Cuestionario.build( //crea objeto cuestionario
-	{creador: "Creador", observaciones: "Observaciones", fechaFin: "Fecha de Finalizacion"}
+	{creador: "Creador", observaciones: "Observaciones", fechaFin: "Fecha de Finalizacion", preguntas: "Preguntas asociadas"}
 	);
     res.render('cuestionarios/new', {cuestionario: cuestionario});
+};
+
+exports.show = function(req, res) {
+    res.render('cuestionarios/show', {cuestionario: req.cuestionario});
 };
 
 // POST /cuestionario/create
@@ -75,7 +91,7 @@ exports.create = function(req, res) {
 			res.render('cuestionarios/new', {cuestionario: cuestionario, errors: err.errors});
 			} else {
 				for(prop in cuestionario.dataValues) {console.log(prop + ' - ' + cuestionario[prop])};
-				cuestionario.save({fields: ["fechaFin", "observaciones", "creador"]}).then(function(){
+				cuestionario.save({fields: ["fechaFin", "observaciones", "creador", "preguntas"]}).then(function(){
 					res.redirect('/admin/cuestionarios');
 				})	//Redireccion HTTP (URL relativo) lista de cuestionarios
 			}

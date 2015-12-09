@@ -32,6 +32,9 @@ Profesor.hasMany(Grupo);
 Cuestionario.belongsTo(Profesor, {foreignKey: 'creador'});
 Profesor.hasMany(Cuestionario);
 
+Quiz.belongsTo(Cuestionario);
+Cuestionario.hasMany(Quiz);
+
 CuestionarioAsignado.belongsTo(Cuestionario, Alumno);	
 Alumno.hasMany(CuestionarioAsignado);
 Cuestionario.hasMany(CuestionarioAsignado);
@@ -97,6 +100,13 @@ sequelize.sync().then(function() {
 		Materia.create({ materia: 'cliente', ensenanza: 'informatica', curso: '2DAW'
 		})
 		.then(function(){console.log('Tabla Materia inicializada')});
+		};
+	});
+        Cuestionario.count().then(function(count) {
+		if(count === 0) { // la tabla se inicializa solo si esta vacia
+		Cuestionario.create({ creador: '1', observaciones: 'intento1', fechaFin: '111'	, preguntas: "1"				 
+		})
+		.then(function(){console.log('Tabla Cuestionario inicializada')});
 		};
 	});
 });

@@ -13,6 +13,10 @@
 <label for="fechF" class="rem">Fecha de Finalizacion:</label>
 <input type="text" id="ape2" name="cuestionario[fechaFin]" value="<%= cuestionario.fechaFin %>" />
 </p>
-<a href="/admin/cuestionarios"><button type="button">Cancelar</button></a>
+<p>
+<label for="preg" class="rem">Preguntas:</label>
+<input type="text" id="ape3" name="cuestionario[preguntas]" value="<%= cuestionario.preguntas %>" />
+</p>
+<a href="/cuestionarios/<%= cuestionario.id %>/quizes/"><button type="button">Cancelar</button></a>
 
 <input type="submit" value="Guardar">

@@ -58,6 +58,7 @@ router.get('/quizes/:quizId(\\d+)/comments/:comentId(\\d+)/publish', sessionCont
 //Cuestionarios
 router.get('/cuestionarios',sessionController.loginRequired, cuestionarioController.index);//ruta de listado de cuestionarios
 router.get('/cuestionarios/:cuestionarioId(\\d+)/edit', sessionController.loginRequired, cuestionarioController.edit);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/show', sessionController.loginRequired, cuestionarioController.show);
 router.put('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequired, cuestionarioController.update);
 router.delete('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequired, cuestionarioController.destroy);
 router.get('/cuestionarios/new',sessionController.loginRequired, cuestionarioController.new);
