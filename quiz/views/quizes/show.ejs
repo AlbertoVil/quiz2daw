@@ -1,11 +1,11 @@
 
-    <form method="get" action="/admin/quizes/<%= quiz.id %>/answer">
+    <form method="get" action="/admin/cuestionarios/<%= cuestionario.id %>/quizes/<%= quiz.id %>/answer">
       <p>Pregunta: <%= quiz.pregunta %> </p>
       <input type="text" name="respuesta" value="Responda aquí"/>
       <input type="submit" value="Enviar">
     </form>
 
-<p><a href="/admin/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>
+<p><a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>
 
 <p><strong>Comentarios:</strong></p>
 
@@ -13,7 +13,7 @@
 	<%if(quiz.Comments[index].publicado || session.user) {%>
 		<p>- <%=quiz.Comments[index].texto%></p>
 		<%if(!quiz.Comments[index].publicado && session.user) {%>
-			<a href="/admin/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id%>/publish"><button>Publicar</button></a>
+			<a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id%>/publish"><button>Publicar</button></a>
 		<%}%>
 		</p>
 	<%}%>

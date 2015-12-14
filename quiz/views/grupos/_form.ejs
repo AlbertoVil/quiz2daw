@@ -1,16 +1,56 @@
-<label for="tutor" class="rem">Tutor:</label>
-<input type="text" id="tutor" name="grupo[tutor]" value="<%= grupo.tutor %>" /> <p>
-<label for="anyo" class="rem">Año:</label>
-<input type="text" id="anyo" name="grupo[anyo]" value="<%= grupo.anyo %>" /> <p>
-<label for="grupo" class="rem">Grupo:</label>
-<input type="text" id="grupo" name="grupo[grupo]" value="<%= grupo.grupo %>" /> <p>
-<label for="subgrupo" class="rem">Subgrupo:</label>
-<input type="text" id="subgrupo" name="grupo[subgrupo]" value="<%= grupo.subgrupo %>" /> <p>
-<label for="anyo" class="rem">Enseñanza:</label>
-<input type="text" id="ensenanza" name="grupo[ensenanza]" value="<%= grupo.ensenanza %>" /> <p>
+<label for="anyo" class="rem">A&ntilde;o:</label>
+
+<select name="grupo[anyo]">
+	<option value="2014/15">2014/15</option>
+	<option value="2015/16">2015/16</option>
+	<option value="2016/17">2016/17</option>
+	<option value="2017/18">2017/18</option>
+</select>
+
+<label for="grupo" class="rem">Nombre del grupo:</label>
+
+<select name="grupo[grupo]">
+	<option value="1ºE.S.O.">1ºE.S.O.</option>
+	<option value="2ºE.S.O.">2ºE.S.O.</option>
+	<option value="3ºE.S.O.">3ºE.S.O.</option>
+	<option value="4ºE.S.O.">4ºE.S.O.</option>
+	<option value="1ºF.P.B.">1ºF.P.B.</option>
+	<option value="2ºF.P.B.">2ºF.P.B.</option>
+	<option value="1ºBACH">1ºBACH</option>
+	<option value="2ºBACH">2ºBACH</option>
+	<option value="1ºG.M.">1ºG.M.</option>
+	<option value="2ºG.M.">2ºG.M.</option>
+	<option value="1ºG.S.">1ºG.S.</option>
+	<option value="2ºG.S.">2ºG.S.</option>
+</select>
+
+<label for="subgrupo" class="rem">Letra</label>
+
+<select name="grupo[subgrupo]">
+	<option value="A">A</option>
+	<option value="B">B</option>
+	<option value="C">C</option>
+	<option value="D">D</option>
+	<option value="E">E</option>
+	<option value="F">F</option>
+</select>
+
+<label for="ensenanza" class="rem">Etapa:</label>
+
+<select name="grupo[ensenanza]">
+	<option value="E.S.O.">E.S.O.</option>
+	<option value="F.P.B.">F.P.B.</option>
+	<option value="BACH">BACH</option>
+	<option value="C.F.G.M.">C.F.G.M.</option>
+	<option value="C.F.G.S.">C.F.G.S.</option>
+</select>
+
 <label for="curso" class="rem">Curso:</label>
-<input type="text" id="curso" name="grupo[curso]" value="<%= grupo.curso %>" /> <p>
-<label for="horarioVisita" class="rem">Horario de Visita:</label>
-<input type="text" id="horarioVisita" name="grupo[horarioVisita]" value="<%= grupo.horarioVisita %>" /> <p>
+<select name="grupo[curso]">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+</select>
 <a href="/admin/users"><button type="button">Cancelar</button></a>
 <input type="submit" value="Guardar" />

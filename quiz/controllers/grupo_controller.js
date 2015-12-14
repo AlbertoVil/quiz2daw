@@ -70,4 +70,53 @@ exports.destroy = function(req, res) {
 	}).catch(function(error) {
 		next(error)
 	});
-}; 
+};
+
+// GET /grupos/new
+exports.new = function(req, res) {
+	var grupo = models.Grupo.build( //crea objeto grupo
+		{
+			anyo: "2015/16", grupo: "1ºESO", subgrupo: "A", ensenanza: "E.S.O.", curso: "1"
+		}
+	);
+    res.render('grupos/new', {grupo: grupo});
+};
+
+// POST /grupos/create
+exports.create = function(req, res) {
+	var grupo = models.Grupo.build( req.body.grupo );
+	grupo.validate()
+	.then(
+		function(err){
+			if(err) {
+			res.render('grupos/new', {grupo: grupo, errors: err.errors});
+			} else {
+				grupo.save({fields: ["anyo", "grupo", "subgrupo", "ensenanza", "curso"]}).then(function(){
+					res.redirect('/admin/grupos');
+				})	//Redireccion HTTP (URL relativo) lista de cuestionarios
+			}
+		}
+	);
+};
+
+exports.cogerTodos = function(req, res, next) {
+	models.Grupo.findAll().then(
+		function(grupos){
+			req.grupos = grupos;
+			next();
+		}
+	).catch(function(error){next(error);})
+};
+
+//Muestra los alumnos de un grupo
+exports.alumnos = function(req, res, next) {
+	models.Alumno.findAll({
+		where : {
+			GrupoId : Number(req.grupo.id)		
+		}
+	}).then(
+		function(alumnos){
+			res.render('grupos/alumnos.ejs', {alumnos: alumnos});
+		}
+	).catch(function(error){next(error);})
+};

@@ -1,1 +1,31 @@
+<table border=1 align="left">
+	<tr>
+		<tr >
+			<td><h3>Creador</h3></td>
+			<td><%= cuestionario.Profesor.nombre %></td>
+		</tr>
+		<tr >
+			<td><h3>Observaciones</h3></td>
+			<td><%= cuestionario.observaciones %></td>
+		</tr>
+		<tr >
+			<td><h3>Fecha</h3></td>
+			<td><%= cuestionario.fechaFin.toDateString() %></td>
+		</tr>
+		<tr>
+			<td rowspan="3" ><h3>acciones</h3></td>
+			<td><a href="/admin/cuestionarios/<%= cuestionario.id %>/edit"><button>editar</button></a></td>
+		</tr>
+		<tr>
+		<td>
+		<a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes"><button>Mostrar Preguntas</button></a>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		<a href="/admin/cuestionarios/<%= cuestionario.id %>/edit"><button>Asignar cuestionarios</button></a>
+		</td>
+		</tr>
+	</tr>
+</table> 
 

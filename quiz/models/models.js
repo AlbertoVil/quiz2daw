@@ -18,6 +18,7 @@ var Observacion = sequelize.import(path.join(__dirname, 'observacion'));
 var Profesor = sequelize.import(path.join(__dirname, 'profesor'));
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
 var User = sequelize.import(path.join(__dirname, 'user'));
+var CuestionarioAsignado = sequelize.import(path.join(__dirname,'cuestionarioAsignado'));
 
 
 Comment.belongsTo(Quiz);
@@ -32,8 +33,8 @@ Profesor.hasMany(Grupo);
 Cuestionario.belongsTo(Profesor, {foreignKey: 'creador'});
 Profesor.hasMany(Cuestionario);
 
-Quiz.belongsTo(Cuestionario);
-Cuestionario.hasMany(Quiz);
+Quiz.belongsToMany(Cuestionario, {through: 'preguntaCuestionario'});
+Cuestionario.belongsToMany(Quiz, {through: 'preguntaCuestionario'});
 
 CuestionarioAsignado.belongsTo(Cuestionario, Alumno);	
 Alumno.hasMany(CuestionarioAsignado);
@@ -102,9 +103,15 @@ sequelize.sync().then(function() {
 		.then(function(){console.log('Tabla Materia inicializada')});
 		};
 	});
+        Cuestionario.findAll({
+			include: [{ model: Quiz }]
+		}).then(
+                function(cuestionarios) {
+			console.log(cuestionarios.length());
+           });
         Cuestionario.count().then(function(count) {
 		if(count === 0) { // la tabla se inicializa solo si esta vacia
-		Cuestionario.create({ creador: '1', observaciones: 'intento1', fechaFin: '111'	, preguntas: "1"				 
+		Cuestionario.create({ creador: '1', observaciones: 'intento1', fechaFin: '111'				 
 		})
 		.then(function(){console.log('Tabla Cuestionario inicializada')});
 		};
